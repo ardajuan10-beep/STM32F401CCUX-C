@@ -1,0 +1,7 @@
+"./Src/I2C_test.o"
+"./Src/main.o"
+"./Src/syscalls.o"
+"./Src/sysmem.o"
+"./Startup/startup_stm32f401ccux.o"
+"./drivers/src/stm32F401ccux_gpio_driver.o"
+"./drivers/src/stm32F401ccux_i2c_driver.o"
