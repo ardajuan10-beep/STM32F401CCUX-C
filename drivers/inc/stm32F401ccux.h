@@ -102,6 +102,21 @@ typedef struct
 	volatile uint32_t 				APB2ENR;	// 0x40023844
 }RCC_RegDef_t;
 
+// Structural register description of SPI
+typedef struct
+{
+	volatile uint32_t 				CR1;		//0x00
+	volatile uint32_t 				dummy_04;	//0x04
+	volatile uint32_t 				SR;			//0x08
+	volatile uint32_t 				DR;			//0x0C
+	volatile uint32_t 				CRCPR;		//0x10
+	volatile uint32_t 				RXCRCR;		//0x14
+	volatile uint32_t 				TXCRCR;		//0x18
+	volatile uint32_t 				I2SCFGR;	//0x1C
+	volatile uint32_t 				I2SPR;		//0x20
+
+}SPI_RegDef_t;
+
 // Structural register description of I2C
 typedef struct
 {
@@ -129,6 +144,12 @@ typedef struct
 #define GPIOD						((GPIO_RegDef_t*) GPIOD_BASEADDR)
 #define GPIOE						((GPIO_RegDef_t*) GPIOE_BASEADDR)
 #define GPIOH						((GPIO_RegDef_t*) GPIOH_BASEADDR)
+
+// SPI Base address pointers to the SPI struct
+#define SPI1						((SPI_RegDef_t*) SPI1_BASEADDR)
+#define SPI2_I2S2					((SPI_RegDef_t*) SPI2_I2S2_BASEADDR)
+#define SPI3_I2S3					((SPI_RegDef_t*) SPI3_I2S3_BASEADDR)
+#define SPI4						((SPI_RegDef_t*) SPI4_BASEADDR)
 
 // I2C Base address pointers to the I2C struct
 #define I2C1						((I2C_RegDef_t*) I2C1_BASEADDR)

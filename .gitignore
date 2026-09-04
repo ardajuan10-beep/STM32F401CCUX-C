@@ -1,0 +1,48 @@
+# =========================================================================
+# STM32CubeIDE (.gitignore)
+# =========================================================================
+
+# --- Build Output Directories ---
+/Debug/
+/Release/
+
+# --- Firmware & Object Artifacts ---
+*.elf
+*.bin
+*.hex
+*.map
+*.o
+*.d
+*.su
+*.cyclo
+*.a
+*.lib
+
+# --- Eclipse & Debugger Configurations ---
+.settings/
+*.launch
+*.log
+.metadata/
+*.tmp
+*.bak
+
+# --- Operating System & Editor Junk ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# =========================================================================
+# TRACKED FILES (Explicitly Keep)
+# =========================================================================
+
+# Eclipse project structure
+!.project
+!.cproject
+
+# STM32CubeMX graphical hardware setup file
+!.ioc
+
+# Linker script & assembly startup
+!*.ld
+!*.s

@@ -1,3 +1,0 @@
-../Src/I2C_test.c:19:13:I2C1_GPIO_Inits	1
-../Src/I2C_test.c:41:13:I2C1_Inits	1
-../Src/I2C_test.c:56:5:I2C_test	2
