@@ -277,8 +277,9 @@ void I2C_Init(I2C_Handle_t *pI2CHandle){
 	//enable clock for i2c peripheral
 	I2C_PeriClockControl(pI2CHandle->pI2Cx,ENABLE);
 
-	//enable
+	//enable peripheral
 	I2C_PeripheralControl(pI2CHandle->pI2Cx, ENABLE);
+
 	//Automatic acking is bit 10 of CR1
 	// Enable or Disable ACK in the Control Register 1
 	if (pI2CHandle->I2C_Config.I2C_ACKControl == ENABLE) {
@@ -347,6 +348,14 @@ void I2C_Init(I2C_Handle_t *pI2CHandle){
 	//enable I2C peripheral
 	I2C_PeripheralControl(pI2CHandle->pI2Cx, ENABLE);
 
+
+	//pI2CHandle->pI2Cx->CR1 |= (1 << 10);  // Set Bit 10 (ACK)
+
 	//acking can only be enabled after peripheral is enabled.
-	pI2CHandle->pI2Cx->CR1 |= (1 << 10);  // Set Bit 10 (ACK)
+	// Enable or Disable ACK in the Control Register 1
+	if (pI2CHandle->I2C_Config.I2C_ACKControl == ENABLE) {
+		pI2CHandle->pI2Cx->CR1 |= (1 << 10);  // Set Bit 10 (ACK)
+	} else {
+		pI2CHandle->pI2Cx->CR1 &= ~(1 << 10); // Clear Bit 10 (ACK)
+	}
 }

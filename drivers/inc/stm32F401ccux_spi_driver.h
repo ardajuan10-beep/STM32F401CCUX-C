@@ -8,6 +8,8 @@
 #ifndef INC_STM32F401CCUX_SPI_DRIVER_H_
 #define INC_STM32F401CCUX_SPI_DRIVER_H_
 
+#include "stm32F401ccux.h"
+
 // Configuration structure for SPIx peripheral
 typedef struct
 {
@@ -26,6 +28,42 @@ typedef struct
 	SPI_RegDef_t	*pSPIx;
 	SPI_Config_t	SPI_Config;
 }SPI_Handle_t;
+
+// SPI Device Modes -> bit 2 of CR1 register
+#define SPI_DeviceMode_Master		1
+#define SPI_DeviceMode_Slave		0
+
+// SPI Bus config -> bit 10 (for receive only simplex) bits 14 (receive or transmit for half duplex) and 15 (half or full duplex) of CR1 register
+#define SPI_BusConfig_FD			1 //full duplex
+#define SPI_BusConfig_HD			2 //half duplex
+//#define SPI_BusConfig_S_TX		3 //simplex TX only //this is equivalent to full duplex communication with one less cable
+#define SPI_BusConfig_S_RX			3 //simplex RX only // this is almost the same as full duplex but we need to enable bit 10 to be able to force clock on master mode without mosi line
+
+// SPI clock speed -> bits 3,4,5 of CR1
+#define SPI_SCLKSpeedDiv_2			0 //divides the peripheral clock by 2
+#define SPI_SCLKSpeedDiv_4			1 //divides the peripheral clock by 4
+#define SPI_SCLKSpeedDiv_8			2 //divides the peripheral clock by 8
+#define SPI_SCLKSpeedDiv_16			3 //divides the peripheral clock by 16
+#define SPI_SCLKSpeedDiv_32			4 //divides the peripheral clock by 32
+#define SPI_SCLKSpeedDiv_64			5 //divides the peripheral clock by 64
+#define SPI_SCLKSpeedDiv_128		6 //divides the peripheral clock by 128
+#define SPI_SCLKSpeedDiv_256		7 //divides the peripheral clock by 256
+
+// SPI Data Format -> bit 11 of CR1
+#define SPI_DFF_16bits				1
+#define SPI_DFF_8bits				0
+
+// SPI CPHA -> bit 0 of CR1
+#define SPI_CPHA_High				1
+#define SPI_CPHA_Low				0
+
+// SPI CPOL -> bit 1 of CR1
+#define SPI_CPOL_High				1
+#define SPI_CPOL_Low				0
+
+//SPI SSM (Software Slave management) -> bit 9 of CR1
+#define SPI_SSM_EN					1 // software slave management
+#define SPI_SSM_DI					0 // hardware slave management
 
 
 /*********************************************************************

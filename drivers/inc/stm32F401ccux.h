@@ -106,7 +106,7 @@ typedef struct
 typedef struct
 {
 	volatile uint32_t 				CR1;		//0x00
-	volatile uint32_t 				dummy_04;	//0x04
+	volatile uint32_t 				CR2;		//0x04
 	volatile uint32_t 				SR;			//0x08
 	volatile uint32_t 				DR;			//0x0C
 	volatile uint32_t 				CRCPR;		//0x10
@@ -226,6 +226,53 @@ typedef struct
 /*/////////////////////////////////////////////////////////////////////*/
 
 /*///////////////////////////////////////////////////////////////////
+//Macros to reset gpiox peripherals
+/////////////////////////////////////////////////////////////////////*/
+#define GPIOA_REG_RESET()			do{ ((RCC->AHB1RSTR) |= (1 << 0));   ((RCC->AHB1RSTR) &= ~(1 << 0)); } while(0) // we do set first then reset immediately after
+#define GPIOB_REG_RESET()			do{ ((RCC->AHB1RSTR) |= (1 << 1));   ((RCC->AHB1RSTR) &= ~(1 << 1)); } while(0) // we do set first then reset immediately after
+#define GPIOC_REG_RESET()			do{ ((RCC->AHB1RSTR) |= (1 << 2));   ((RCC->AHB1RSTR) &= ~(1 << 2)); } while(0) // we do set first then reset immediately after
+#define GPIOD_REG_RESET()			do{ ((RCC->AHB1RSTR) |= (1 << 3));   ((RCC->AHB1RSTR) &= ~(1 << 3)); } while(0) // we do set first then reset immediately after
+#define GPIOE_REG_RESET()			do{ ((RCC->AHB1RSTR) |= (1 << 4));   ((RCC->AHB1RSTR) &= ~(1 << 4)); } while(0) // we do set first then reset immediately after
+#define GPIOH_REG_RESET()			do{ ((RCC->AHB1RSTR) |= (1 << 7));   ((RCC->AHB1RSTR) &= ~(1 << 7)); } while(0) // we do set first then reset immediately after
+
+/*///////////////////////////////////////////////////////////////////
+//SPI REGISTER BITS
+/////////////////////////////////////////////////////////////////////*/
+#define SPI_CR1_CPHA				0
+#define SPI_CR1_CPOL				1
+#define SPI_CR1_MSTR				2
+#define SPI_CR1_BR					3
+#define SPI_CR1_SPE					6
+#define SPI_CR1_LSB_FIRST			7
+#define SPI_CR1_SSI					8
+#define SPI_CR1_SSM					9
+#define SPI_CR1_RX_ONLY				10
+#define SPI_CR1_DFF					11
+#define SPI_CR1_CRC_NEXT			12
+#define SPI_CR1_CRC_EN				13
+#define SPI_CR1_BIDI_OE				14
+#define SPI_CR1_BIDI_MODE			15
+
+#define SPI_CR2_RXDMAEN				0
+#define SPI_CR2_TXDMAEN				1
+#define SPI_CR2_SSOE				2
+#define SPI_CR2_FRF					4
+#define SPI_CR2_ERRIE				5
+#define SPI_CR2_RXNEIE				6
+#define SPI_CR2_TXEIE				7
+
+#define SPI_SR_RXNE					0
+#define SPI_SR_TXE					1
+#define SPI_SR_CHSIDE				2
+#define SPI_SR_UDR					3
+#define SPI_SR_CRC_ERR				4
+#define SPI_SR_MODF					5
+#define SPI_SR_OVR					6
+#define SPI_SR_BSY					7
+#define SPI_SR_FRE					8
+
+
+/*///////////////////////////////////////////////////////////////////
 //I2C REGISTER BITS
 /////////////////////////////////////////////////////////////////////*/
 #define I2C_CR1_PE					0
@@ -285,6 +332,7 @@ typedef struct
 
 #include "stm32F401ccux_i2c_driver.h"
 #include "stm32F401ccux_gpio_driver.h"
+#include "stm32F401ccux_spi_driver.h"
 
 
 
