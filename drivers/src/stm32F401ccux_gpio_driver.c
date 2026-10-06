@@ -148,19 +148,34 @@ void GPIO_DeInit(GPIO_RegDef_t *pGPIOx){
 
 // read write
 uint8_t GPIO_ReadFromInputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber){
-
+	// read the input data register, right shift by pin number and mask with 1 to get the value of the pin
+	uint8_t value = (uint8_t)((pGPIOx->IDR >> PinNumber) & 0x00000001);
+	return value;
 }
+
 uint16_t GPIO_ReadFromInputPort(GPIO_RegDef_t *pGPIOx){
-
+	// read the input data register and return the value
+	uint16_t value = (uint16_t)(pGPIOx->IDR);
+	return value;
 }
+
 void GPIO_WriteToOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber, uint8_t value){
-
+	// write the value to the output data register. If value is 1, set the bit, else clear the bit
+	if(value == GPIO_PIN_SET){
+		pGPIOx->ODR |= (1 << PinNumber);
+	}else{
+		pGPIOx->ODR &= ~(1 << PinNumber);
+	}
 }
+
 void GPIO_WriteToOutputPort(GPIO_RegDef_t *pGPIOx, uint16_t value){
+	// write the value to the output data register
+	pGPIOx->ODR = value;
 
 }
 void GPIO_ToggleOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber){
-
+	// toggle the output pin by XORing the output data register with 1 shifted left by the pin number
+	pGPIOx->ODR ^= (1 << PinNumber);
 }
 
 //irq configuration and ISR handling
